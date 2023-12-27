@@ -4,19 +4,12 @@ public class MarsRover()
 {
     private readonly string _initialState;
     private Position _position;
-    private readonly West _west;
-    private readonly East _east;
-    private readonly South _south;
-    private readonly North _north;
+    private IDirection _direction;
 
     public MarsRover(string initialState) : this()
     {
         _initialState = initialState;
         _position = new Position();
-        _west = new West();
-        _east = new East();
-        _south = new South();
-        _north = new North();
     }
 
     public string Execute(string commands)
@@ -32,21 +25,23 @@ public class MarsRover()
         switch (direction)
         {
             case "N":
-                _position = _north.MoveForward(_position);
+                _direction = new North();
                 break;
 
             case "S":
-                _position = _south.MoveForward(_position);
+                _direction = new South();
                 break;
 
             case "E":
-                _position = _east.MoveForward(_position);
+                _direction = new East();
                 break;
 
             case "W":
-                _position = _west.MoveForward(_position);
+                _direction = new West();
                 break;
         }
+        _position = _direction.MoveForward(_position);
+
         return $"{_position._x}:{_position._y}:{direction}";
     }
 }

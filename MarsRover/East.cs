@@ -1,6 +1,6 @@
 namespace MarsRover;
 
-public class East
+public class East : IDirection
 {
     public East()
     {

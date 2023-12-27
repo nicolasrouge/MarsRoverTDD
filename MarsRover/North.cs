@@ -1,6 +1,6 @@
 namespace MarsRover;
 
-public class North
+public class North : IDirection
 {
     public North()
     {
