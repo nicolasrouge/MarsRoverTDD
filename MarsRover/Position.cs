@@ -1,7 +1,7 @@
 namespace MarsRover;
 
-public class Position
+public class Position(int x, int y)
 {
-    public int _x;
-    public int _y;
+    public readonly int X = x;
+    public readonly int Y = y;
 }
