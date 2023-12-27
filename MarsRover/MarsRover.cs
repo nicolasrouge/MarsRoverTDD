@@ -1,64 +1,52 @@
 namespace MarsRover;
 
-public class Position
+public class MarsRover()
 {
-    public int _x;
-    public int _y;
-}
+    private readonly string _initialState;
+    private Position _position;
+    private readonly West _west;
+    private readonly East _east;
+    private readonly South _south;
+    private readonly North _north;
 
-public class MarsRover(string initialState)
-{
-    private Position _position = new();
+    public MarsRover(string initialState) : this()
+    {
+        _initialState = initialState;
+        _position = new Position();
+        _west = new West();
+        _east = new East();
+        _south = new South();
+        _north = new North();
+    }
 
     public string Execute(string commands)
     {
-        var states = initialState.Split(":");
+        var states = _initialState.Split(":");
 
         _position._x = int.Parse((states[0]));
         _position._y = int.Parse(states[1]);
         var direction = states[2];
 
-        if (commands != "M") return initialState;
-        
+        if (commands != "M") return _initialState;
+
         switch (direction)
         {
             case "N":
-                _position = MoveNorth(_position);
+                _position = _north.MoveForward(_position);
                 break;
+
             case "S":
-                _position = MoveSouth(_position);
+                _position = _south.MoveForward(_position);
                 break;
+
             case "E":
-                _position = MoveEst(_position);
+                _position = _east.MoveForward(_position);
                 break;
+
             case "W":
-                _position = MoveWest(_position);
+                _position = _west.MoveForward(_position);
                 break;
         }
         return $"{_position._x}:{_position._y}:{direction}";
-    }
-
-    private Position MoveWest(Position position)
-    {
-        position._x--;
-        return position;
-    }
-
-    private Position MoveEst(Position position)
-    {
-        position._x++;
-        return position;
-    }
-
-    private Position MoveSouth(Position position)
-    {
-        position._y--;
-        return position;
-    }
-
-    private Position MoveNorth(Position position)
-    {
-        position._y++;
-        return position;
     }
 }
