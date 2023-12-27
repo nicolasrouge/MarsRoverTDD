@@ -1,6 +1,7 @@
-# MarsRover TDD Coding Kata
+# MarsRover TDD Coding Kata <source>(https://youtu.be/_hdanhfIAUI?t=1219)
 - .NET8, xUnit, FluentAssertion
 - readonly vs {get:}
-- switch case code smell
+- switch case code smell (lacking polymorphism, of State tretegy)
+- primitive obsession code smell
 - $"{}"
-- 
+- FactoryhMethod
