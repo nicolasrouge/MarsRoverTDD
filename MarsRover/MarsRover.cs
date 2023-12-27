@@ -1,13 +1,21 @@
 namespace MarsRover;
 
+public class Position
+{
+    public int _x;
+    public int _y;
+}
+
 public class MarsRover(string initialState)
 {
+    private Position _position = new();
+
     public string Execute(string commands)
     {
         var states = initialState.Split(":");
 
-        var x = int.Parse((states[0]));
-        var y = int.Parse(states[1]);
+        _position._x = int.Parse((states[0]));
+        _position._y = int.Parse(states[1]);
         var direction = states[2];
 
         if (commands != "M") return initialState;
@@ -15,18 +23,42 @@ public class MarsRover(string initialState)
         switch (direction)
         {
             case "N":
-                y++;
+                _position = MoveNorth(_position);
                 break;
             case "S":
-                y--;
+                _position = MoveSouth(_position);
                 break;
             case "E":
-                x++;
+                _position = MoveEst(_position);
                 break;
             case "W":
-                x--;
+                _position = MoveWest(_position);
                 break;
         }
-        return $"{x}:{y}:{direction}";
+        return $"{_position._x}:{_position._y}:{direction}";
+    }
+
+    private Position MoveWest(Position position)
+    {
+        position._x--;
+        return position;
+    }
+
+    private Position MoveEst(Position position)
+    {
+        position._x++;
+        return position;
+    }
+
+    private Position MoveSouth(Position position)
+    {
+        position._y--;
+        return position;
+    }
+
+    private Position MoveNorth(Position position)
+    {
+        position._y++;
+        return position;
     }
 }
