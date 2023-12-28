@@ -4,5 +4,9 @@ public interface IDirection
 {
     public Position MoveForward(Position position);
 
-    public string TurnRight();
+    public string AsStringCommand();
+
+    public IDirection ToRight();
+
+    public IDirection ToLeft();
 }
