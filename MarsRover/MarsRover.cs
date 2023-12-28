@@ -5,7 +5,7 @@ namespace MarsRover;
 public class MarsRover()
 {
     private readonly string _initialState;
-    private Rover _rover = new();
+    private Rover _rover;
 
     public MarsRover(string initialState) : this() => _initialState = initialState;
 

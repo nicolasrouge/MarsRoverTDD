@@ -13,10 +13,6 @@ namespace MarsRover
             Position = position;
         }
 
-        public Rover()
-        {
-        }
-
         public Rover TurnLeft() => new(Direction.ToLeft(), Position);
 
         public Rover TurnRight() => new(Direction.ToRight(), Position);
