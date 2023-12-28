@@ -15,20 +15,13 @@ public class MarsRover()
 
         foreach (var command in commands)
         {
-            switch (command)
+            _rover = command switch
             {
-                case 'M':
-                    _rover = _rover.MoveForward();
-                    break;
-
-                case 'R':
-                    _rover = _rover.TurnRight();
-                    break;
-
-                case 'L':
-                    _rover = _rover.TurnLeft();
-                    break;
-            }
+                'M' => _rover.MoveForward(),
+                'R' => _rover.TurnRight(),
+                'L' => _rover.TurnLeft(),
+                _ => _rover
+            };
         }
 
         return $"{_rover.Position.X}:{_rover.Position.Y}:{_rover.Direction.AsStringCommand()}";
