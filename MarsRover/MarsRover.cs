@@ -5,7 +5,7 @@ namespace MarsRover;
 public class MarsRover()
 {
     private readonly string _initialState;
-    private readonly Rover _rover = new();
+    private Rover _rover = new();
 
     public MarsRover(string initialState) : this() => _initialState = initialState;
 
@@ -15,23 +15,26 @@ public class MarsRover()
         var x = int.Parse((states[0]));
         var y = int.Parse(states[1]);
         var initialDirectionState = states[2];
-        _rover.Position = new Position(x, y);
-        _rover.Direction = DirectionFactory.CreateDirectionFrom(initialDirectionState);
+
+        var position = new Position(x, y);
+        var direction = DirectionFactory.CreateDirectionFrom(initialDirectionState);
+
+        _rover = new Rover(direction, position);
 
         foreach (var command in commands)
         {
             switch (command)
             {
                 case 'M':
-                    _rover.MoveForward();
+                    _rover = _rover.MoveForward();
                     break;
 
                 case 'R':
-                    _rover.TurnRight();
+                    _rover = _rover.TurnRight();
                     break;
 
                 case 'L':
-                    _rover.TurnLeft();
+                    _rover = _rover.TurnLeft();
                     break;
             }
         }
