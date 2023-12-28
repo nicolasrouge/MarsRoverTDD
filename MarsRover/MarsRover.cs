@@ -11,15 +11,7 @@ public class MarsRover()
 
     public string? Execute(string commands)
     {
-        var states = _initialState?.Split(":");
-        var x = int.Parse((states[0]));
-        var y = int.Parse(states[1]);
-        var initialDirectionState = states[2];
-
-        var position = new Position(x, y);
-        var direction = DirectionFactory.CreateDirectionFrom(initialDirectionState);
-
-        _rover = new Rover(direction, position);
+        _rover = RoverFactory.CreateRover(_initialState);
 
         foreach (var command in commands)
         {
