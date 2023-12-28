@@ -25,6 +25,7 @@ public class MarsRoverShould
     [InlineData("1:1:S", "L", "1:1:E")]
     [InlineData("1:1:E", "L", "1:1:N")]
     [InlineData("1:1:W", "L", "1:1:S")]
+    [InlineData("1:1:W", "LL", "1:1:E")]
     public void ExecuteCommands(string initialState, string commands, string expectedResult)
     {
         //Arrange
