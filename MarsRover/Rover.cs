@@ -2,16 +2,10 @@
 
 namespace MarsRover
 {
-    public class Rover
+    public class Rover(IDirection direction, Position position)
     {
-        public readonly IDirection Direction;
-        public readonly Position Position;
-
-        public Rover(IDirection direction, Position position)
-        {
-            Direction = direction;
-            Position = position;
-        }
+        public readonly IDirection Direction = direction;
+        public readonly Position Position = position;
 
         public Rover TurnLeft() => new(Direction.ToLeft(), Position);
 
