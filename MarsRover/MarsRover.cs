@@ -1,4 +1,4 @@
-using MarsRover.Directions;
+using MarsRover.Commands;
 
 namespace MarsRover;
 
@@ -6,6 +6,7 @@ public class MarsRover()
 {
     private readonly string _initialState;
     private Rover _rover;
+    private ICommand _command;
 
     public MarsRover(string initialState) : this() => _initialState = initialState;
 
@@ -15,15 +16,10 @@ public class MarsRover()
 
         foreach (var command in commands)
         {
-            _rover = command switch
-            {
-                'M' => _rover.MoveForward(),
-                'R' => _rover.TurnRight(),
-                'L' => _rover.TurnLeft(),
-                _ => _rover
-            };
+            _command = CommandFactory.CreateCommandFrom(command);
+            _rover = _rover.Apply(_command);
         }
 
-        return $"{_rover.Position.X}:{_rover.Position.Y}:{_rover.Direction.AsStringCommand()}";
+        return _rover.Print(_rover);
     }
 }

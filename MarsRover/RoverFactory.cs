@@ -7,7 +7,7 @@ public static class RoverFactory
     public static Rover CreateRover(string initialState)
     {
         var states = initialState.Split(":");
-        var x = int.Parse((states[0]));
+        var x = int.Parse(states[0]);
         var y = int.Parse(states[1]);
         var initialDirectionState = states[2];
         var newPosition = new Position(x, y);

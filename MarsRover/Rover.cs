@@ -1,4 +1,5 @@
-﻿using MarsRover.Directions;
+﻿using MarsRover.Commands;
+using MarsRover.Directions;
 
 namespace MarsRover
 {
@@ -7,10 +8,23 @@ namespace MarsRover
         public readonly IDirection Direction = direction;
         public readonly Position Position = position;
 
-        public Rover TurnLeft() => new(Direction.ToLeft(), Position);
+        public Rover Apply(ICommand command)
+        {
+            return ApplyCommand((dynamic)command);
+        }
 
-        public Rover TurnRight() => new(Direction.ToRight(), Position);
+        private Rover ApplyCommand(MoveForwardCommand c) 
+            => new(Direction, Direction.MoveForward(Position));
 
-        public Rover MoveForward() => new(Direction, Direction.MoveForward(Position));
+        private Rover ApplyCommand(TurnRightCommand c) 
+            => new(Direction.ToRight(), Position);
+
+        private Rover ApplyCommand(TurnLeftCommand c) 
+            => new(Direction.ToLeft(), Position);
+
+        public string Print(Rover rover)
+        {
+            return $"{rover.Position.X}:{rover.Position.Y}:{rover.Direction.AsStringCommand()}";
+        }
     }
 }
